@@ -26,8 +26,8 @@ GPIO.output(in4, GPIO.LOW)
 
 a = GPIO.PWM(ena, 1000)
 b = GPIO.PWM(enb, 1000)
-a.start(50)
-b.start(50)
+a.start(75)
+b.start(75)
 
 def stop(s):
     GPIO.output(in1, GPIO.LOW)
