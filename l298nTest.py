@@ -84,21 +84,21 @@ while (1):
         x = 'z'
 
     elif x=='left':
-        GPIO.output(in1, GPIO.LOW)
-        GPIO.output(in2, GPIO.HIGH)
-        GPIO.output(in3, GPIO.HIGH)
-        GPIO.output(in4, GPIO.LOW)
-
-        print("left")
-        x = 'z'
-
-    elif x=='right':
         GPIO.output(in1, GPIO.HIGH)
         GPIO.output(in2, GPIO.LOW)
         GPIO.output(in3, GPIO.LOW)
         GPIO.output(in4, GPIO.HIGH)
 
-        print("right")
+        print("going left")
+        x = 'z'
+
+    elif x=='right':
+        GPIO.output(in1, GPIO.LOW)
+        GPIO.output(in2, GPIO.HIGH)
+        GPIO.output(in3, GPIO.HIGH)
+        GPIO.output(in4, GPIO.LOW)
+
+        print("going right")
         x = 'z'
 
     elif x == 'l':
