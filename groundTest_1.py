@@ -25,13 +25,14 @@ enb_right = 37
 outputPins = [17, 27, 22, 5, 6, 13, 23, 24, 25, 12, 16, 37]
 inPins = [17, 27, 5, 6, 23, 24, 12, 16]
 
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(outputPins, GPIO.OUT)
 
-a_left = GPIO.PWM(ena_left, 1000)
-b_left = GPIO.PWM(enb_left, 1000)
-a_right = GPIO.PWM(ena_right, 1000)
-b_right = GPIO.PWM(enb_right, 1000)
+a_left = GPIO.PWM(ena_left, 100)
+b_left = GPIO.PWM(enb_left, 100)
+a_right = GPIO.PWM(ena_right, 100)
+b_right = GPIO.PWM(enb_right, 100)
 
 a_left.start(75)
 b_left.start(75)
