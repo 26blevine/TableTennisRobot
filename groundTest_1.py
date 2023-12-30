@@ -1,63 +1,87 @@
 import RPi.GPIO as GPIO
 from time import sleep
 
-in1 = 23
-in2 = 24
-ena = 25
-in3 = 17
-in4 = 27
-enb = 22
-temp1 = 1
+
+
+in1_left = 17
+in2_left = 27
+ena_left = 22
+in3_left = 5
+in4_left = 6
+enb_left = 13
+#temp_left = 1
+
+in1_right = 23
+in2_right = 24
+ena_right = 25
+in3_right = 12
+in4_right = 16
+enb_right = 37
+#temp_right = 1
+outputPins = [17, 27, 22, 5, 6, 13, 23, 24, 25, 12, 16, 37]
+inPins = [17, 27, 5, 6, 23, 24, 12, 16]
 
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(in1, GPIO.OUT)
-GPIO.setup(in2, GPIO.OUT)
-GPIO.setup(ena, GPIO.OUT)
+GPIO.setup(outputPins, GPIO.OUT)
 
-GPIO.setup(in3, GPIO.OUT)
-GPIO.setup(in4, GPIO.OUT)
-GPIO.setup(enb, GPIO.OUT)
 
-GPIO.output(in1, GPIO.LOW)
-GPIO.output(in2, GPIO.LOW)
-GPIO.output(in3, GPIO.LOW)
-GPIO.output(in4, GPIO.LOW)
+a_left = GPIO.PWM(ena_left, 1000)
+b_left = GPIO.PWM(enb_left, 1000)
 
-a = GPIO.PWM(ena, 1000)
-b = GPIO.PWM(enb, 1000)
-a.start(75)
-b.start(75)
+a_right = GPIO.PWM(ena_right, 1000)
+b_right = GPIO.PWM(enb_right, 1000)
+a_left.start(75)
+b_left.start(75)
+a_right.start(75)
+b_right.start(75)
 
 def stop(s):
-    GPIO.output(in1, GPIO.LOW)
-    GPIO.output(in2, GPIO.LOW)
-    GPIO.output(in3, GPIO.LOW)
-    GPIO.output(in4, GPIO.LOW)
+    GPIO.output(inPins, GPIO.LOW)
     sleep(s)
 def forward(s):
-    GPIO.output(in1, GPIO.HIGH)
-    GPIO.output(in2, GPIO.LOW)
-    GPIO.output(in3, GPIO.HIGH)
-    GPIO.output(in4, GPIO.LOW)
+    GPIO.output(in1_left, GPIO.HIGH)
+    GPIO.output(in2_left, GPIO.LOW)
+    GPIO.output(in3_left, GPIO.HIGH)
+    GPIO.output(in4_left, GPIO.LOW)
+
+    GPIO.output(in1_right, GPIO.HIGH)
+    GPIO.output(in2_right, GPIO.LOW)
+    GPIO.output(in3_right, GPIO.HIGH)
+    GPIO.output(in4_right, GPIO.LOW)
     sleep(s)
 def backward(s):
-    GPIO.output(in1, GPIO.LOW)
-    GPIO.output(in2, GPIO.HIGH)
-    GPIO.output(in3, GPIO.LOW)
-    GPIO.output(in4, GPIO.HIGH)
+    GPIO.output(in1_left, GPIO.LOW)
+    GPIO.output(in2_left, GPIO.HIGH)
+    GPIO.output(in3_left, GPIO.LOW)
+    GPIO.output(in4_left, GPIO.HIGH)
+
+    GPIO.output(in1_right, GPIO.LOW)
+    GPIO.output(in2_right, GPIO.HIGH)
+    GPIO.output(in3_right, GPIO.LOW)
+    GPIO.output(in4_right, GPIO.HIGH)
     sleep(s)
 def left(s):
-    GPIO.output(in1, GPIO.HIGH)
-    GPIO.output(in2, GPIO.LOW)
-    GPIO.output(in3, GPIO.LOW)
-    GPIO.output(in4, GPIO.HIGH)
+    GPIO.output(in1_left, GPIO.HIGH)
+    GPIO.output(in2_left, GPIO.LOW)
+    GPIO.output(in3_left, GPIO.LOW)
+    GPIO.output(in4_left, GPIO.HIGH)
+
+    GPIO.output(in1_right, GPIO.HIGH)
+    GPIO.output(in2_right, GPIO.LOW)
+    GPIO.output(in3_right, GPIO.LOW)
+    GPIO.output(in4_right, GPIO.HIGH)
     sleep(s)
 def right(s):
-    GPIO.output(in1, GPIO.LOW)
-    GPIO.output(in2, GPIO.HIGH)
-    GPIO.output(in3, GPIO.HIGH)
-    GPIO.output(in4, GPIO.LOW)
+    GPIO.output(in1_left, GPIO.LOW)
+    GPIO.output(in2_left, GPIO.HIGH)
+    GPIO.output(in3_left, GPIO.HIGH)
+    GPIO.output(in4_left, GPIO.LOW)
+
+    GPIO.output(in1_right, GPIO.LOW)
+    GPIO.output(in2_right, GPIO.HIGH)
+    GPIO.output(in3_right, GPIO.HIGH)
+    GPIO.output(in4_right, GPIO.LOW)
     sleep(s)
 
 print("ready")
