@@ -36,7 +36,7 @@ def backward(s):
 
 
 print("ready")
-sleep(15)
+sleep(3)
 
 forward(3)
 backward(3)
