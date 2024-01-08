@@ -154,24 +154,24 @@ stop(3)
 '''
 isStopped = False
 while not isStopped:
-	inp = input("operation: ")
-	if (inp  == "f"):
-		forward(3)
-	elif (inp == "b"):
-		backward(3)
-	elif (inp == "l"):
-		left(3)
-	elif (inp == "r"):
-		right(3)
-	elif (inp == "s"):
-		stop(3)
-	elif (inp =="ii"):
+    inp = input("operation: ")
+    if inp == "f":
+        forward(3)
+    elif inp == "b":
+        backward(3)
+    elif inp == "l":
+        left(3)
+    elif inp == "r":
+        right(3)
+    elif inp == "s":
+        stop(3)
+    elif inp == "ii":
         intakeIn(3)
-    elif (inp == "io"):
+    elif inp == "io":
         intakeOut(3)
-	elif (inp == "e"):
-		isStopped = True
-		print("exiting")
-		cleanup()
-	else:
-		print("Invalid ")
+    elif inp == "e":
+        isStopped = True
+        print("exiting")
+        cleanup()
+    else:
+        print("Invalid ")
