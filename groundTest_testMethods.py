@@ -11,6 +11,7 @@ ena_left = 22
 in3_left = 5
 in4_left = 6
 enb_left = 13
+#temp_left = 1
 
 # Right back
 in1_right = 23
@@ -20,15 +21,10 @@ ena_right = 25
 in3_right = 12
 in4_right = 16
 enb_right = 26
+#temp_right = 1
 
-#intake
-in1_intake = 9
-in2_intake = 10
-ena_intake = 11
-
-
-outputPins = [17, 27, 22, 5, 6, 13, 23, 24, 25, 12, 16, 26, 9, 10, 11]
-inPins = [17, 27, 5, 6, 23, 24, 12, 16,  9, 10]
+outputPins = [17, 27, 22, 5, 6, 13, 23, 24, 25, 12, 16, 26]
+inPins = [17, 27, 5, 6, 23, 24, 12, 16]
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(outputPins, GPIO.OUT)
@@ -37,16 +33,13 @@ a_left = GPIO.PWM(ena_left, 100)
 b_left = GPIO.PWM(enb_left, 100)
 a_right = GPIO.PWM(ena_right, 100)
 b_right = GPIO.PWM(enb_right, 100)
-a_intake = GPIO.PWM(ena_intake, 100)
 
-a_left.start(0)
-b_left.start(0)
-a_right.start(0)
-b_right.start(0)
-a_intake.start(0)
+a_left.start(0) #Left front
+b_left.start(0) #Left back
+a_right.start(0) #Right back
+b_right.start(0) #Right front
 
 def stop(s):
-    print("stop")
     GPIO.output(inPins, GPIO.LOW)
 
     sleep(s)
@@ -101,8 +94,8 @@ def right(s):
     GPIO.output(in3_right, GPIO.LOW)
     GPIO.output(in4_right, GPIO.HIGH)
 
-    a_right.ChangeDutyCycle(100)
-    b_right.ChangeDutyCycle(100)
+    a_right.ChangeDutyCycle(0)
+    b_right.ChangeDutyCycle(0)
     a_left.ChangeDutyCycle(100)
     b_left.ChangeDutyCycle(100)
 
@@ -122,8 +115,8 @@ def left(s):
 
     a_right.ChangeDutyCycle(100)
     b_right.ChangeDutyCycle(100)
-    a_left.ChangeDutyCycle(100)
-    b_left.ChangeDutyCycle(100)
+    a_left.ChangeDutyCycle(0)
+    b_left.ChangeDutyCycle(0)
 
     sleep(s)
     
@@ -131,47 +124,15 @@ def cleanup():
     GPIO.cleanup()
     sys.exit()
 
-def intakeIn(s):
-    GPIO.output(in1_intake, GPIO.LOW)
-    GPIO.output(in2_intake, GPIO.HIGH)
-    ena_intake.ChangeDutyCycle(100)
-    sleep(s)
-def intakeOut(s):
-    GPIO.output(in1_intake, GPIO.HIGH)
-    GPIO.output(in2_intake, GPIO.LOW)
-    ena_intake.ChangeDutyCycle(0)
-    sleep(s)
-
 print("ready")
 
-#sleep(5)
-'''
-forward(3)
-backward(3)
+sleep(10)
+
+#forward(3)
+#backward(3)
+right(3)
 left(3)
 right(3)
+left(3)
 stop(3)
-'''
-isStopped = False
-while not isStopped:
-	inp = input("operation: ")
-	if (inp  == "f"):
-		forward(3)
-	elif (inp == "b"):
-		backward(3)
-	elif (inp == "l"):
-		left(3)
-	elif (inp == "r"):
-		right(3)
-	elif (inp == "s"):
-		stop(3)
-	elif (inp =="ii"):
-        intakeIn(3)
-    elif (inp == "io"):
-        intakeOut(3)
-	elif (inp == "e"):
-		isStopped = True
-		print("exiting")
-		cleanup()
-	else:
-		print("Invalid ")
+cleanup()
