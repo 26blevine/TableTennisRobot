@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 from time import sleep
+import sys
 
 
 # Left front
@@ -19,10 +20,10 @@ ena_right = 25
 # Right front
 in3_right = 12
 in4_right = 16
-enb_right = 37
+enb_right = 26
 #temp_right = 1
 
-outputPins = [17, 27, 22, 5, 6, 13, 23, 24, 25, 12, 16, 37]
+outputPins = [17, 27, 22, 5, 6, 13, 23, 24, 25, 12, 16, 26]
 inPins = [17, 27, 5, 6, 23, 24, 12, 16]
 
 GPIO.setmode(GPIO.BCM)
@@ -33,13 +34,14 @@ b_left = GPIO.PWM(enb_left, 100)
 a_right = GPIO.PWM(ena_right, 100)
 b_right = GPIO.PWM(enb_right, 100)
 
-a_left.start(100)
-b_left.start(100)
-a_right.start(100)
-b_right.start(100)
+a_left.start(0) #Left front
+b_left.start(0) #Left back
+a_right.start(0) #Right back
+b_right.start(0) #Right front
 
 def stop(s):
     GPIO.output(inPins, GPIO.LOW)
+
     sleep(s)
 def forward(s):
     print("forwards")
@@ -52,7 +54,15 @@ def forward(s):
     GPIO.output(in2_right, GPIO.LOW)
     GPIO.output(in3_right, GPIO.HIGH)
     GPIO.output(in4_right, GPIO.LOW)
+
+
+    a_right.ChangeDutyCycle(100)
+    b_right.ChangeDutyCycle(100)
+    a_left.ChangeDutyCycle(100)
+    b_left.ChangeDutyCycle(100)
+
     sleep(s)
+
 def backward(s):
     print("backwards")
     GPIO.output(in1_left, GPIO.LOW)
@@ -64,37 +74,65 @@ def backward(s):
     GPIO.output(in2_right, GPIO.HIGH)
     GPIO.output(in3_right, GPIO.LOW)
     GPIO.output(in4_right, GPIO.HIGH)
-    sleep(s)
-def left(s):
-    print("left")
-    GPIO.output(in1_left, GPIO.HIGH)
-    GPIO.output(in2_left, GPIO.LOW)
-    GPIO.output(in3_left, GPIO.LOW)
-    GPIO.output(in4_left, GPIO.HIGH)
 
-    GPIO.output(in1_right, GPIO.HIGH)
-    GPIO.output(in2_right, GPIO.LOW)
-    GPIO.output(in3_right, GPIO.LOW)
-    GPIO.output(in4_right, GPIO.HIGH)
+    a_right.ChangeDutyCycle(100)
+    b_right.ChangeDutyCycle(100)
+    a_left.ChangeDutyCycle(100)
+    b_left.ChangeDutyCycle(100)
+
     sleep(s)
+
 def right(s):
     print("right")
-    GPIO.output(in1_left, GPIO.LOW)
-    GPIO.output(in2_left, GPIO.HIGH)
+    GPIO.output(in1_left, GPIO.HIGH)
+    GPIO.output(in2_left, GPIO.LOW)
     GPIO.output(in3_left, GPIO.HIGH)
     GPIO.output(in4_left, GPIO.LOW)
 
     GPIO.output(in1_right, GPIO.LOW)
     GPIO.output(in2_right, GPIO.HIGH)
-    GPIO.output(in3_right, GPIO.HIGH)
-    GPIO.output(in4_right, GPIO.LOW)
+    GPIO.output(in3_right, GPIO.LOW)
+    GPIO.output(in4_right, GPIO.HIGH)
+
+    a_right.ChangeDutyCycle(0)
+    b_right.ChangeDutyCycle(0)
+    a_left.ChangeDutyCycle(100)
+    b_left.ChangeDutyCycle(100)
+
     sleep(s)
 
-print("ready")
-sleep(5)
+def left(s):
+    print("left")
+    GPIO.output(in1_left, GPIO.LOW)
+    GPIO.output(in2_left, GPIO.HIGH)
+    GPIO.output(in3_left, GPIO.LOW)
+    GPIO.output(in4_left, GPIO.HIGH)
 
-forward(3)
-backward(3)
+    GPIO.output(in1_right, GPIO.HIGH)
+    GPIO.output(in2_right, GPIO.LOW)
+    GPIO.output(in3_right, GPIO.HIGH)
+    GPIO.output(in4_right, GPIO.LOW)
+
+    a_right.ChangeDutyCycle(100)
+    b_right.ChangeDutyCycle(100)
+    a_left.ChangeDutyCycle(0)
+    b_left.ChangeDutyCycle(0)
+
+    sleep(s)
+    
+def cleanup():
+    GPIO.cleanup()
+    sys.exit()
+
+print("ready")
+
+sleep(10)
+
+#forward(3)
+#backward(3)
+right(3)
 left(3)
 right(3)
+left(3)
 stop(3)
+cleanup()
