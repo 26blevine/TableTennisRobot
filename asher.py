@@ -3,6 +3,7 @@ import os
 
 # from important_stuff import real_functionality
 app = Flask(__name__)
+print("Hi")
 app.config['UPLOAD_FOLDER'] = '/Users/benjylevine/Documents/GitHub/TableTennisRobot/files'
 
 
