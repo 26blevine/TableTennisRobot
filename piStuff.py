@@ -5,7 +5,7 @@ import subprocess
 # put it in a folder, easier 
 # make it save to somewhere good
 
-url = 'http://10.0.0.157:3000/api/send'  # REPLACE THE IP ADRESS W THE ONE I SHOWED
+url = 'http://127.0.0.1:5000/api/send'  # REPLACE THE IP ADRESS W THE ONE I SHOWED
 # YOU HOW TO GETTTTTTTTT
 files = {'file': open('./pictures/woah.jpg', 'rb')}  # make the path to the folder RELATIVe
 # TO WHERE YOU AREEEEEE
