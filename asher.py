@@ -4,7 +4,7 @@ import os
 # from important_stuff import real_functionality
 app = Flask(__name__)
 print("Hi")
-app.config['UPLOAD_FOLDER'] = '/Users/benjylevine/Documents/GitHub/TableTennisRobot/files'
+app.config['UPLOAD_FOLDER'] = './files/'
 
 
 @app.route('/api/send', methods=['POST'])
@@ -27,7 +27,7 @@ def yay():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port='3000', debug=True)
 
 
 
