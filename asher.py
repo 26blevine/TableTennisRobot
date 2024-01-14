@@ -17,12 +17,12 @@ def index():
 def do_stuff(file):
     # do stuff
     # yay!
-    return 'yay'
+    return (1, 2, 3)
 
 
 @app.route('/api/get_data', methods=['GET'])
 def yay():
-    output = do_stuff()
+    output = do_stuff('')
     return jsonify({'result': output})
 
 
