@@ -1,9 +1,9 @@
 from flask import Flask, jsonify, request
 import os
 
-
 # from important_stuff import real_functionality
 app = Flask(__name__)
+
 app.config['UPLOAD_FOLDER'] = './files/'
 
 
@@ -13,11 +13,11 @@ def index():
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], "wow.png"))
     return jsonify({'result': 'success'})
 
+
 def do_stuff(file):
     # do stuff
     # yay!
     return 'yay'
-
 
 
 @app.route('/api/get_data', methods=['GET'])

@@ -7,7 +7,7 @@ import subprocess
 
 url = 'http://127.0.0.1:5000/api/send'  # REPLACE THE IP ADRESS W THE ONE I SHOWED
 # YOU HOW TO GETTTTTTTTT
-files = {'file': open('./pictures/woah.jpg', 'rb')}  # make the path to the folder RELATIVe
+files = {'file': open('./pictures/frame.jpg', 'rb')}  # make the path to the folder RELATIVe
 # TO WHERE YOU AREEEEEE
 # make the ./pictures/waoh whatever make that where the thing pu in the subprocess thing
 
