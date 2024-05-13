@@ -36,13 +36,8 @@ rightMotors = 1
 print("Setup Complete!")
 
 def analyzeFrame(imagePath):
-    # Take Frame From Webcam
     print("New Frame")
-   # result, frame = webcam.read()
-    # Choose Frame To Investigate
-    imageCaptured = imagePath
-    # Predict
-    prediction = model.predict(imageCaptured)
+    prediction = model.predict(imagePath)
     #Initialize list
     ballsFound = []
     # Calculate boundaries for bounding box
@@ -53,23 +48,21 @@ def analyzeFrame(imagePath):
         y2 = bounding_box['y'] + bounding_box['height'] / 2
         # Create bounding box object
         ballBox = objectBox(x1, x2, y1, y2)
-        #add bounding box to list
         ballsFound.append(ballBox)
-        #print(ballBox.absolute_distance)
 
 
-
-    #print("Unsorted:")
-    #print(ballsFound)
     ballsFound.sort(key=lambda objectBox: objectBox.absolute_distance)
-    #print("Sorted")
-    #print(ballsFound)
+    if (len(ballsFound)) == 0:
+        ballsFound.append(-1, -1, -1)
+
     prediction.plot()
+
     closestBall = ballsFound[0]
     closestBall_dist = [closestBall.x_dist, closestBall.y_dist, closestBall.absolute_distance]
-    #print(f"The closest ball is {closestBall.absolute_distance} pixels away")
+
     print(f"x: {closestBall_dist[0]}, y: {closestBall_dist[1]}, abs: {closestBall_dist[2]}")
-    analyzeDistance(closestBall_dist[0], closestBall_dist[1], closestBall_dist[2])
+
+    return analyzeDistance(closestBall_dist[0], closestBall_dist[1], closestBall_dist[2])
 
 '''
     if closestBall.x_dist > 25:
@@ -86,3 +79,5 @@ def analyzeDistance(x, y, abs):
     x_dist = x
     y_dist = y
     abs_dist = abs
+
+    return "" + x + " " + y + " " + abs_dist
