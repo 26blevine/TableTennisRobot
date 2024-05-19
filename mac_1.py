@@ -31,6 +31,7 @@ def do_stuff(file):
 @app.route('/api/get_data', methods=['GET'])
 def yay():
     output = do_stuff(things[1])
+    #print(jsonify({'result': output}))
     return jsonify({'result': output})
 
 
