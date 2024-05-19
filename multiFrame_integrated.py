@@ -14,7 +14,7 @@ class objectBox:
             this.y_center = (this.top+this.bottom)/2
 
             this.x_dist = this.x_center - 2328
-            this.y_dist = 1748-this.y_center
+            this.y_dist = 3496-this.y_center
             this.absolute_distance = math.hypot(this.x_dist, this.y_dist)
         else:
             this.top = -1
@@ -93,4 +93,5 @@ def analyzeDistance(x, y, abs):
     y_dist = y
     abs_dist = abs
 
-    return f"{x} {y} {abs_dist}"
+    #return f"{x_dist} {y_dist} {abs_dist}"
+    return [x_dist, y_dist, abs_dist]

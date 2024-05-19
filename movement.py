@@ -144,34 +144,21 @@ def intakeOut(s):
 
 print("ready")
 
-#sleep(5)
-'''
-forward(3)
-backward(3)
-left(3)
-right(3)
-stop(3)
-'''
-isStopped = False
-while not isStopped:
-    inp = input("operation: ")
-    if inp == "f":
-        forward(3)
-    elif inp == "b":
-        backward(3)
-    elif inp == "l":
-        left(3)
-    elif inp == "r":
-        right(3)
-    elif inp == "s":
-        stop(3)
-    elif inp == "ii":
-        intakeIn(3)
-    elif inp == "io":
-        intakeOut(3)
-    elif inp == "e":
-        isStopped = True
-        print("exiting")
-        cleanup()
+def move(ballCoords):
+    x = ballCoords[0]
+    y=ballCoords[1]
+    abs = ballCoords[2]
+
+
+    if y != -1:
+        x /= 100
+        y /= 100
+
+        if x < 0:
+            left(int(x))
+        else:
+            right(int(x))
+
+        forward(int(y))
     else:
-        print("Invalid ")
+        left(int(x))
