@@ -5,5 +5,5 @@ from time import sleep
 piTransfer1()
 sleep(3)
 piTransfer2()
-sleep(1)
+sleep(20)
 piTransfer3()
