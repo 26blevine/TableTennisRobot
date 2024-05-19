@@ -1,0 +1,12 @@
+names:
+- Table-Tennis-Ball
+nc: 1
+roboflow:
+  license: CC BY 4.0
+  project: table-tennis-ball-model
+  url: https://universe.roboflow.com/bsl/table-tennis-ball-model/dataset/1
+  version: 1
+  workspace: bsl
+test: ../test/images
+train: Table-Tennis-Ball-Model-1/train/images
+val: Table-Tennis-Ball-Model-1/valid/images
